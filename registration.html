@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>College Event Registration</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+        }
+        .form-container {
+            background: white;
+            width: 300px;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0 15px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background: #0066cc;
+            color: white;
+            border: none;
+            padding: 10px;
+            width: 100%;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #0055aa;
+        }
+        .error {
+            color: red;
+            font-size: 12px;
+            margin-top: -10px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Event Registration</h2>
+        <form id="regForm">
+            <label for="name">Full Name:</label>
+            <input type="text" id="name" required>
+            <div id="nameError" class="error"></div>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" required>
+            <div id="emailError" class="error"></div>
+
+            <label for="phone">Phone:</label>
+            <input type="tel" id="phone" required>
+            <div id="phoneError" class="error"></div>
+
+            <label for="college">College Name:</label>
+            <input type="text" id="college" required>
+
+            <label for="event">Select Event:</label>
+            <select id="event" required>
+                <option value="">-- Choose --</option>
+                <option value="coding">Coding Competition</option>
+                <option value="quiz">General Quiz</option>
+                <option value="debate">Debate</option>
+            </select>
+            <div id="eventError" class="error"></div>
+
+            <button type="button" onclick="validateForm()">Register</button>
+        </form>
+    </div>
+
+    <script>
+        function validateForm() {
+            let valid = true;
+            
+            // Name validation
+            const name = document.getElementById("name").value;
+            if (name.trim() === "") {
+                document.getElementById("nameError").textContent = "Name is required";
+                valid = false;
+            } else {
+                document.getElementById("nameError").textContent = "";
+            }
+
+            // Email validation
+            const email = document.getElementById("email").value;
+            if (!email.includes("@") || !email.includes(".")) {
+                document.getElementById("emailError").textContent = "Valid email required";
+                valid = false;
+            } else {
+                document.getElementById("emailError").textContent = "";
+            }
+
+            // Phone validation
+            const phone = document.getElementById("phone").value;
+            if (phone.length !== 10 || isNaN(phone)) {
+                document.getElementById("phoneError").textContent = "10 digit number required";
+                valid = false;
+            } else {
+                document.getElementById("phoneError").textContent = "";
+            }
+
+            // Event validation
+            const event = document.getElementById("event").value;
+            if (event === "") {
+                document.getElementById("eventError").textContent = "Please select an event";
+                valid = false;
+            } else {
+                document.getElementById("eventError").textContent = "";
+            }
+
+            if (valid) {
+                alert("Registration Successful!");
+                document.getElementById("regForm").reset();
+            }
+        }
+    </script>
+</body>
+</html>
